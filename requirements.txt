@@ -1,8 +1,8 @@
-numpy==1.19.5
-librosa==0.8.0
-noisereduce==1.1.0
-matplotlib==3.2.2
-pandas==1.2.4
+numpy
+librosa
+noisereduce
+matplotlib
+pandas
 tensorflow-cpu
 Flask==2.0.1
 sklearn==0.0
