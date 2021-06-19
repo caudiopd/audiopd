@@ -81,28 +81,24 @@ def index():
 
 model_path = r"./"
 model_name = "cnnnew"
-model=None
 # Replicate label encoder
 lb = LabelEncoder()
 # label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
 #         'drilling', 'engine_idling', 'glassbreak', 'gun_shot',
 #         'jackhammer', 'scream', 'siren', 'street_music']
 label = ['dog_bark','gun_shot','glassbreak','scream']
-def load_model():
-    # model work
-    # model = pickle.load(open('random.pkl', 'rb'))
+# model work
+# model = pickle.load(open('random.pkl', 'rb'))
 
-    global model
-    # Model reconstruction from JSON file
-    with open(model_path + model_name + '.json', 'r') as f:
-        model = tf.keras.models.model_from_json(f.read())
+
+# Model reconstruction from JSON file
+with open(model_path + model_name + '.json', 'r') as f:
+    model = tf.keras.models.model_from_json(f.read())
 
     # Load weights into the new model
-    model.load_weights(model_path + model_name + '.h5')
+model.load_weights(model_path + model_name + '.h5')
 
-   
-    
-    lb.fit_transform(label)
+lb.fit_transform(label)
 
     
     
@@ -170,7 +166,7 @@ def y_predict():
                 mfccs_scaled_features=mfccs_scaled_features.reshape(1,128,-1)
                 
                 samples_wrote += buffer
-                probs = model.predict(mfccs_scaled_features/128)
+                probs = model.predict_proba(mfccs_scaled_features/128)
                 best_labels = np.argsort(probs[0])[:-4:-1]
                 counter += 1
                 if(label[best_labels[0]]=='glassbreak' or label[best_labels[1]]=='glassbreak'):
@@ -217,5 +213,4 @@ def y_predict():
 
 
 if __name__ == "__main__":
-    load_model()
     app.run(debug=True)
