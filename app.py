@@ -170,7 +170,7 @@ def y_predict():
                 mfccs_scaled_features=mfccs_scaled_features.reshape(1,128,-1)
                 
                 samples_wrote += buffer
-                probs = model.predict_proba(mfccs_scaled_features)
+                probs = model.predict(mfccs_scaled_features/128)
                 best_labels = np.argsort(probs[0])[:-4:-1]
                 counter += 1
                 if(label[best_labels[0]]=='glassbreak' or label[best_labels[1]]=='glassbreak'):
