@@ -23,7 +23,6 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install PyAudio-0.2.11-cp39-cp39-win_amd64.whl
         pip install flake8 pytest
         pip install -r requirements.txt
         
