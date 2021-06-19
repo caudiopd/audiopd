@@ -1,5 +1,6 @@
 import unittest
-
+import warnings 
+warnings.filterwarnings('ignore')
 from app import app
 
 class BasicTestCase(unittest.TestCase):
