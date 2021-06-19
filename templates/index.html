@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAP-D Detector</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/style.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script type="text/javascript">
+(function() {
+emailjs.init("user_Eg9sdL9wD7QvKw6Hxcegz");
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script> 
+<script type="text/javascript">
+    
+
+
+    
+    // the link to your model provided by Teachable Machine export panel
+    const URL = "https://teachablemachine.withgoogle.com/models/HsZUP733Q/";
+
+    async function createModel() {
+        const checkpointURL = URL + "model.json"; // model topology
+        const metadataURL = URL + "metadata.json"; // model metadata
+        
+        const recognizer = speechCommands.create(
+            "BROWSER_FFT", // fourier transform type, not useful to change
+            undefined, // speech commands vocabulary feature, not useful for your models
+            checkpointURL,
+            metadataURL);
+
+        // check that model and metadata are loaded via HTTPS requests.
+        await recognizer.ensureModelLoaded();
+
+        return recognizer;
+    }
+ //Mail 
+
+ function signout(){
+  window.location.href = '/';
+}
+
+
+
+
+ let send=[];
+ let sendwav = [];
+ let sendsamp=[];
+ 
+ function sendEmail(msg) {
+  
+  var temp = {
+    to_name:prompt("Enter sender name"),
+    sender:prompt("Enter sender Email ID"),
+    message:msg,
+  };
+  emailjs.send('gmail','template_58rxben',temp)
+  .then(function(res){
+    alert("successfully sent",res.status);
+  })
+  document.getElementById("mail").style.display = "none";
+ // document.getElementById("mailwav").style.display = "none";
+ send=[];
+ sendwav=[];
+ sendsamp=[];
+ }
+    
+    async function init() {
+        sendsamp=[];
+        const recognizer = await createModel();
+        const classLabels = recognizer.wordLabels(); // get class labels
+        document.getElementById("label-container").style.display="";
+        const labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < classLabels.length; i++) {
+            labelContainer.appendChild(document.createElement("div"));
+        }
+
+
+
+        // listen() takes two arguments:
+        // 1. A callback function that is invoked anytime a word is recognized.
+        // 2. A configuration object with adjustable fields
+        recognizer.listen(result => {
+            const scores = result.scores; // probability of prediction for each class
+            // render the probability scores per class
+            
+          
+            for (let i = 0; i < classLabels.length; i++) {
+              
+        let time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        let strtime = time.toString();
+              const score = result.scores[i].toFixed(2);
+              
+              if(score >= 0.50)
+              {
+                const classPrediction = classLabels[i] + " is detected at "+strtime + "\n";
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+                send.push(classPrediction);
+                
+              }
+              else
+              {
+                const classPrediction = "-------------------------------";
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+              }
+            }
+            store(result);
+        }, {
+            includeSpectrogram: true, // in case listen should return result.spectrogram
+            probabilityThreshold: 0.75,
+            invokeCallbackOnNoiseAndUnknown: true,
+            overlapFactor: 0.50 // probably want between 0.5 and 0.75. More info in README
+        });
+
+        // Stop the recognition in 5 seconds.
+        // setTimeout(() => recognizer.stopListening(), 5000);
+    }
+//For Wav file Mail
+
+//textarea space trimming
+function trimfield(str) 
+{ 
+    return str.replace(/^\s+|\s+$/g,''); 
+}
+
+//function checkwav()
+//{
+ // document.getElementById("mail").style.display = "block";
+//}
+function mailwav()
+{
+  
+  sendwav.push(document.getElementById("wavout").value);
+ // alert(document.getElementById("wavout").value);
+  let msg = sendwav.join(" ");
+  alert(msg)
+  if(trimfield(msg)=="")
+  {
+    alert("No detections taken place to send as email");
+  }
+  else 
+  {
+  
+  sendEmail(msg);
+  }
+}
+
+
+
+
+//////////////////////////
+
+//For Real Time Mail    
+function check()
+{
+  sendsamp=send;
+  send=[];
+  document.getElementById("label-container").style.display="none";
+  document.getElementById("mail").style.display = "block";
+  //put some stop function;
+  
+}
+
+
+function mail()
+{
+  if(sendsamp.length==0 )
+  {
+    alert("No detections taken place to send as email");
+  }
+  else 
+  {
+  let msg = sendsamp.join(" ");
+  sendEmail(msg);
+  }
+}
+function refresh(){
+  window.location.reload("Refresh");
+ }
+  
+</script>
+    
+  
+
+<body>
+    <header>
+        
+            <nav>
+            <ul>
+                <li><a href="https://www.google.com/gmail/about/">Check E-Logs</a></li>
+              <li><a href="#" onclick="signout()" value="Logout">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+    
+
+<div class="container">
+    
+  <div class="split left">
+    <h1>Real Time Prediction</h1>
+    <div class="centered">
+    
+      <div id="label-container"></div>
+    <button class="button" onClick="init()"><span>Start Prediction</span></button> 
+   
+   <p><button class="button" onClick="check()"><span>Stop Predicition</span></button></p> 
+    
+    
+    
+    <button class="button"  onclick="mail()"><span>Send E-Logs</span></button>
+    
+
+    
+  </div>
+  
+</div>
+
+  
+  
+  <div class="split right">
+    <h2>Uploaded Predcition</h2>
+  <div class="centered2">
+    
+    <div id="label-container"></div>
+    <p><form class="form1" action="{{ url_for('y_predict')}}" enctype = "multipart/form-data"  method = "post"></p>
+     
+      <p><p>
+      <div class="file-upload">
+        <div class="file-select">
+          <div class="file-select-button" id="fileName">Choose File</div>
+          <div class="file-select-name" id="noFile">Upload WAV File...</div> 
+          <input type="file" name="file" id="songs" accept="audio/wav">
+        </div>
+      </div>
+      </p></p>
+      
+      
+      <!--input type="file" name ="file" id="songs" accept="audio/wav"/-->
+     
+    <p><audio controls id="myAudio" autoplay></audio></p>
+      
+      
+    <p><button class="button2"onclick="checkwav()" value="Run">Run</button></p>
+      
+   
+</form>
+
+<!-- <h2>John Doe</h2> -->
+    <p>{% if outlist != [] or ots != ""%}
+     
+      <div id="">
+          <textarea class='autoExpand' id="wavout" rows='8' data-min-rows='3'  autofocus> {% for res in outlist %}
+            {{ res }}
+            {% endfor %}
+          </textarea>
+        
+          <div>
+            {{ ots }}</div>
+      </div>
+   {% endif %}</p>
+
+   
+   <button class="button3" onclick="mailwav()"><span>Send E-Logs</span></button> 
+
+ 
+
+  
+  </div>
+  
+</div>
+
+
+
+<!-- JQUERY CODE FOR PLAYING WAV FILE  STARTS-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  var $audio = $('#myAudio');
+  $('input').on('change', function(e) {
+    var target = e.currentTarget;
+    var file = target.files[0];
+    var reader = new FileReader();
+  
+    console.log($audio[0]);
+     if (target.files && file) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $audio.attr('src', e.target.result);
+              $audio.play();
+          }
+          reader.readAsDataURL(file);
+      }
+  });
+</script>
+
+
+<!-- ENDS -->
+  </div>
+</div>
+
+
+<script src="../static/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+html,body {
+    font-family: helvetica, arial, sans-serif; /*real time predictio font*/
+    color: white;
+  }
+
+  .autoExpand{
+    font-weight: bold; /*white-box*/
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .signout
+  {
+    width:100px;
+    float: right; /*logout*/
+  }
+  
+
+  .form1{
+    top:100%;
+  }
+  
+  .centered {
+  
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .centered2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .centered img {
+    width: 150px;
+    border-radius: 50%;
+  }
+
+  .file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload .file-select{display:block;border: 2px solid #dce4ec;color: rgb(13, 165, 224);cursor:pointer;height:40px;line-height:40px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
+.file-upload .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
+.file-upload .file-select .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
+.file-upload .file-select:hover{border-color:rgb(13, 165, 224);transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload .file-select:hover .file-select-button{background:rgb(13, 165, 224);color:#FFFFFF;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload.active .file-select{border-color:#3fa46a;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload.active .file-select .file-select-button{background:#3fa46a;color:#FFFFFF;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload .file-select input[type=file]{z-index:100;cursor:pointer;position:absolute;height:100%;width:100%;top:0;left:0;opacity:0;filter:alpha(opacity=0);}
+.file-upload .file-select.file-select-disabled{opacity:0.65;}
+.file-upload .file-select.file-select-disabled:hover{cursor:default;display:block;border: 2px solid #dce4ec;color: rgba(255,255,255,0.2);cursor:pointer;height:40px;line-height:40px;margin-top:5px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
+.file-upload .file-select.file-select-disabled:hover .file-select-button{background:#dce4ec;color:#666666;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
+.file-upload .file-select.file-select-disabled:hover .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
+  
+ 
+
+    #songs { 
+      width: 100%; /*width of the choose file*/
+      margin-bottom: 10px; 
+      background: rgba(0,0,0,0.3);
+      border: none;
+      outline: none;
+      padding: 10px;
+      font-size: 13px;
+      color: #fff;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,0,0,0.3);
+      border-radius: 4px;
+      box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+      -webkit-transition: box-shadow .5s ease;
+      -moz-transition: box-shadow .5s ease;
+      -o-transition: box-shadow .5s ease;
+      -ms-transition: box-shadow .5s ease;
+      transition: box-shadow .5s ease;
+    
+    
+    }
+    #songs:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+
+body {
+	margin: 0;
+	background:white;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 800;
+}
+
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+header {
+  background:rgb(44, 42, 42);
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 10px 0;
+}
+
+nav {
+  float: right;
+  
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+
+  position: relative;
+}
+
+nav a {
+  color:white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+nav a:hover {
+  color: rgb(13, 165, 224);
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: rgb(13, 165, 224);
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+
+
+
+:root {
+  --container-bg-color: #333;
+  --left-bg-color: rgba(39, 196, 223, 0.7);
+  --left-button-hover-color: rgba(11, 101, 161, 0.3);
+  --right-bg-color: rgba(43, 43, 43, 0.8);
+  --right-button-hover-color: rgba(92, 92, 92, 0.3);
+  --hover-width: 75%;
+  --other-width: 25%;
+  --speed: 1000ms;
+}
+
+html, body {
+  padding:0;
+  margin:0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+h1 { /*heading of both screens*/
+  font-size: 3.5rem;
+  color: #292523;
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+h2 { /*heading of both screens*/
+  font-size: 3.5rem;
+  color: rgb(13, 165, 224);
+  position: absolute;
+  left: 50%;
+  top: 1%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+
+
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--container-bg-color);
+}
+
+.split {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.split.left {
+  left:0;
+  
+  background: url(sound.jpg) no-repeat;
+  background-size: cover;
+}
+
+.split.left:before {
+  position:absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: var(--left-bg-color);
+}
+
+.split.right {
+  right:0;
+  background: url(bg.jpg) no-repeat;
+  background-size: cover;
+}
+
+
+  
+
+.split.right:before {
+  position:absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: var(--right-bg-color);
+}
+
+.split.left, .split.right, .split.right:before, .split.left:before {
+  transition: var(--speed) all ease-in-out;
+}
+
+.hover-left .left {
+  width: var(--hover-width);
+}
+
+.hover-left .right {
+  width: var(--other-width);
+}
+
+.hover-left .right:before {
+  z-index: 2;
+}
+
+
+.hover-right .right {
+  width: var(--hover-width);
+}
+
+.hover-right .left {
+  width: var(--other-width);
+}
+
+.hover-right .left:before {
+  z-index: 2;
+}
+
+
+.button {
+  border-radius: 4px;
+  background-color: #292523;
+  border: none;
+  color:rgb(13, 165, 224);
+  text-align: center;
+  font-size: 19px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button2 {
+  position: relative;
+  background-color: rgb(13, 165, 224);
+  border: none;
+  font-size: 19px;
+  color: #292523;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button2:after {
+  content: "";
+  background: #65c1ec;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -40px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button2:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.button3 {
+  border-radius: 4px;
+  background-color:  rgb(13, 165, 224);
+  border: none;
+  color:#292523;
+  text-align: center;
+  font-size: 19px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button3 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button3 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button3:hover span {
+  padding-right: 25px;
+}
+
+.button3:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
