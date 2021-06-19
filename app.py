@@ -1,14 +1,11 @@
 import numpy as np
 import librosa
 import pyaudio
-import time
 from noisereduce.generate_noise import band_limited_noise
 import matplotlib.pyplot as plt
 import noisereduce as nr
 import tensorflow as tf
 from sklearn.preprocessing import LabelEncoder
-import os
-import IPython
 import pyaudio
 import numpy as np
 from flask import Flask, request, jsonify, render_template,redirect,request,Response
