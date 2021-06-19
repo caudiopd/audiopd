@@ -1,12 +1,10 @@
 import numpy as np
 import librosa
-import pyaudio
 from noisereduce.generate_noise import band_limited_noise
 import matplotlib.pyplot as plt
 import noisereduce as nr
 import tensorflow as tf
 from sklearn.preprocessing import LabelEncoder
-import pyaudio
 import numpy as np
 from flask import Flask, request, jsonify, render_template,redirect,request,Response
 from flask import (
@@ -89,7 +87,7 @@ lb = LabelEncoder()
 # label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
 #         'drilling', 'engine_idling', 'glassbreak', 'gun_shot',
 #         'jackhammer', 'scream', 'siren', 'street_music']
-label = ['dogbark','gunshot','glassbreak','scream']
+label = ['dog_bark','gun_shot','glassbreak','scream']
 def load_model():
     # model work
     # model = pickle.load(open('random.pkl', 'rb'))
@@ -113,7 +111,6 @@ def load_model():
 CHUNK = 2**11
 RATE = 22050
 selected_labels = ['gun_shot','dog_bark','scream','glassbreak','siren']
-p=pyaudio.PyAudio()
 
 
 # @app.route('/')
