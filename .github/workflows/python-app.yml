@@ -23,9 +23,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install flake8 pytest
-        pip install -r requirements.txt
-        
+                
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -35,11 +35,10 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    - name: Deploy to Heroku
-      env:
-        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      if: github.ref == 'refs/heads/master' && job.status == 'success'
+    - name: Add remote origin
+      if: github.ref == 'refs/heads/master' && job.status == 'success' #we specify that this action will ONLY run if everything up to now is successful- so if theres a fail in the tests, then this will not be deployed.
       run: |
-        git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+    - name: Deploy to Heroku
+      run: |
         git push heroku HEAD:master -f      
