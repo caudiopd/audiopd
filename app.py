@@ -5,7 +5,7 @@ import time
 from noisereduce.generate_noise import band_limited_noise
 import matplotlib.pyplot as plt
 import noisereduce as nr
-from keras.models import model_from_json
+import tensorflow as tf
 from sklearn.preprocessing import LabelEncoder
 import os
 import IPython
@@ -100,7 +100,7 @@ def load_model():
     global model
     # Model reconstruction from JSON file
     with open(model_path + model_name + '.json', 'r') as f:
-        model = model_from_json(f.read())
+        model = tf.keras.models.model_from_json(f.read())
 
     # Load weights into the new model
     model.load_weights(model_path + model_name + '.h5')
