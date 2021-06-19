@@ -4,7 +4,7 @@ librosa==0.8.0
 PyAudio==0.2.11
 noisereduce==1.1.0
 matplotlib==3.2.2
-pandas==1.0.3
+pandas==1.2.4
 tensorboard==2.5.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.0
