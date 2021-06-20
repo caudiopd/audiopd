@@ -133,7 +133,7 @@ def y_predict():
             audio, sr = librosa.load(file)
             # Get number of samples for 2 seconds; replace 2 by any number
             buffer = 4 * sr
-
+            model = app.model
             samples_total = len(audio)
             samples_wrote = 0
             counter = 0
@@ -210,5 +210,6 @@ if __name__ == "__main__":
     model_path = r"./"
     model_name = "cnnnew"
     with open(model_path + model_name + '.json', 'r') as f:
-        model = tf.keras.models.model_from_json(f.read())
+        app.model = tf.keras.models.model_from_json(f.read())
+    app.model.load_weights(model_path + model_name + '.h5')
     app.run(debug=True)
