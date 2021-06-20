@@ -87,9 +87,11 @@ lb = LabelEncoder()
 label = ['dog_bark','gun_shot','glassbreak','scream']
 # model work
 # model = pickle.load(open('random.pkl', 'rb'))
-model=None
-def model(model):
-    model=model
+model_path = r"./"
+model_name = "cnnnew"
+with open(model_path + model_name + '.json', 'r') as f:
+    model = tf.keras.models.model_from_json(f.read())
+model.load_weights(model_path + model_name + '.h5')
     
 
 
@@ -136,7 +138,6 @@ def y_predict():
             audio, sr = librosa.load(file)
             # Get number of samples for 2 seconds; replace 2 by any number
             buffer = 4 * sr
-            model = app.model
             samples_total = len(audio)
             samples_wrote = 0
             counter = 0
@@ -206,14 +207,7 @@ def y_predict():
 
             
             
-    return render_template('index.html',outlist=outlist,ots=ots)
-
+    return render_template('index.html',outlist=outlist,ots=
 
 if __name__ == "__main__":
-    model_path = r"./"
-    model_name = "cnnnew"
-    with open(model_path + model_name + '.json', 'r') as f:
-        model = tf.keras.models.model_from_json(f.read())
-    model.load_weights(model_path + model_name + '.h5')
-    model(model)
-    app.run(debug=True)
+    app.run()
