@@ -79,8 +79,6 @@ def profile():
 def index():
     return render_template('index.html')
 
-model_path = r"./"
-model_name = "cnnnew"
 # Replicate label encoder
 lb = LabelEncoder()
 # label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
@@ -91,12 +89,7 @@ label = ['dog_bark','gun_shot','glassbreak','scream']
 # model = pickle.load(open('random.pkl', 'rb'))
 
 
-# Model reconstruction from JSON file
-with open(model_path + model_name + '.json', 'r') as f:
-    model = tf.keras.models.model_from_json(f.read())
 
-    # Load weights into the new model
-model.load_weights(model_path + model_name + '.h5')
 
 lb.fit_transform(label)
 
@@ -126,17 +119,20 @@ def y_predict():
     output=""
     if(request.method == "POST"):
         print("FORM DATA RECEIVED")
+        file = request.files["file"]
+        file.stream.seek(0) # seek to the beginning of file
+        myfile = file.file
         if("file" not in request.files):
             output="No File Uploaded"
             return redirect(request.url)
 
-        file = request.files["file"]
+        
         
         if(file.filename == ""):
             output="No File Uploaded"
             return redirect(request.url)
         if(file):
-            audio, sr = librosa.load(file)
+            audio, sr = librosa.load(myfile)
             # Get number of samples for 2 seconds; replace 2 by any number
             buffer = 4 * sr
 
@@ -213,4 +209,8 @@ def y_predict():
 
 
 if __name__ == "__main__":
+    model_path = r"./"
+    model_name = "cnnnew"
+    with open(model_path + model_name + '.json', 'r') as f:
+        model = tf.keras.models.model_from_json(f.read())
     app.run(debug=True)
