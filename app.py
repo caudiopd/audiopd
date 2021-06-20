@@ -207,7 +207,7 @@ def y_predict():
 
             
             
-    return render_template('index.html',outlist=outlist,ots=
+    return render_template('index.html',outlist=outlist,ots=ots)
 
 if __name__ == "__main__":
     app.run()
