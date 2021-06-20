@@ -158,7 +158,7 @@ def y_predict():
                 noise_clip = noise[:rate*noise_len]
                 audio_clip_band_limited = block+noise
             #     noise_reduced = nr.reduce_noise(audio_clip=audio_clip_band_limited, noise_clip=noise_clip,prop_decrease=1.0, verbose=False)
-                noise_reduced = nr.reduce_noise(audio_clip=block, noise_clip=audio_clip_band_limited, prop_decrease=1.0,pad_clipping=True, use_tensorflow=True,verbose=False)
+                noise_reduced = nr.reduce_noise(audio_clip=audio_clip_band_limited, noise_clip=noise_clip, prop_decrease=1.0,pad_clipping=True, use_tensorflow=True,verbose=False)
                 mfccs_features = librosa.feature.melspectrogram(y=noise_reduced, sr=sr)
                 mfccs_scaled_features = np.mean(mfccs_features.T,axis=0)
                 
@@ -166,7 +166,7 @@ def y_predict():
                 mfccs_scaled_features=mfccs_scaled_features.reshape(1,128,-1)
                 
                 samples_wrote += buffer
-                probs = model.predict_proba(mfccs_scaled_features/128)
+                probs = model.predict(mfccs_scaled_features/128)
                 best_labels = np.argsort(probs[0])[:-4:-1]
                 counter += 1
                 if(label[best_labels[0]]=='glassbreak' or label[best_labels[1]]=='glassbreak'):
