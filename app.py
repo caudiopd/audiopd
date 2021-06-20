@@ -87,7 +87,10 @@ lb = LabelEncoder()
 label = ['dog_bark','gun_shot','glassbreak','scream']
 # model work
 # model = pickle.load(open('random.pkl', 'rb'))
-
+model=None
+def model(model):
+    model=model
+    
 
 
 
@@ -210,6 +213,7 @@ if __name__ == "__main__":
     model_path = r"./"
     model_name = "cnnnew"
     with open(model_path + model_name + '.json', 'r') as f:
-        app.model = tf.keras.models.model_from_json(f.read())
-    app.model.load_weights(model_path + model_name + '.h5')
+        model = tf.keras.models.model_from_json(f.read())
+    model.load_weights(model_path + model_name + '.h5')
+    model(model)
     app.run(debug=True)
