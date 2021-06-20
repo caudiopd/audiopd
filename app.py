@@ -120,8 +120,6 @@ def y_predict():
     if(request.method == "POST"):
         print("FORM DATA RECEIVED")
         file = request.files["file"]
-        file.stream.seek(0) # seek to the beginning of file
-        myfile = file.file
         if("file" not in request.files):
             output="No File Uploaded"
             return redirect(request.url)
@@ -132,7 +130,7 @@ def y_predict():
             output="No File Uploaded"
             return redirect(request.url)
         if(file):
-            audio, sr = librosa.load(myfile)
+            audio, sr = librosa.load(file)
             # Get number of samples for 2 seconds; replace 2 by any number
             buffer = 4 * sr
 
