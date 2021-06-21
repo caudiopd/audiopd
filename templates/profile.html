@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
+      document.getElementById("chk").innerHTML = localStorage.getItem("name");
+      
         setTimeout(function(){
             window.location.href = 'index.html';
         }, 3000);
@@ -21,7 +23,9 @@
     <section class="hero is-success is-fullheight">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">  Welcome, User to CAP-D</h1>
+          <h1 class="title">  Welcome, 
+          <div id="chk"></id> to CAP-D
+          </h1>
             <h3 class="title" id="username"> 
               
             </h3> 
