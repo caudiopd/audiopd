@@ -186,7 +186,7 @@ h1 { /*heading of both screens*/
   left: 50%;
   top: 2%;
   transform: translateX(-50%);
-  white-space: nowrap;
+  white-space: pre-wrap;
 }
 
 h2 { /*heading of both screens*/
@@ -196,7 +196,7 @@ h2 { /*heading of both screens*/
   left: 50%;
   top: 1%;
   transform: translateX(-50%);
-  white-space: nowrap;
+  white-space: pre-wrap;
 }
 
 
