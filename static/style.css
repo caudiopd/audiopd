@@ -1,4 +1,5 @@
 html,body {
+    overflow-y: hidden;
     font-family: helvetica, arial, sans-serif; /*real time predictio font*/
     color: white;
   }
@@ -164,8 +165,8 @@ nav a:hover::before {
   --left-button-hover-color: rgba(11, 101, 161, 0.3);
   --right-bg-color: rgba(43, 43, 43, 0.8);
   --right-button-hover-color: rgba(92, 92, 92, 0.3);
-  --hover-width: 75%;
-  --other-width: 25%;
+  --hover-width: 85%;
+  --other-width: 15%;
   --speed: 1000ms;
 }
 
