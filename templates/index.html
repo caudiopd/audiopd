@@ -75,7 +75,6 @@ emailjs.init("user_DMcYvnWAixcEdHEFs362N");
         sendsamp=[];
         const recognizer = await createModel();
         const classLabels = recognizer.wordLabels(); // get class labels
-        document.getElementById("label-container").style.display="";
         const labelContainer = document.getElementById("label-container");
         for (let i = 0; i < classLabels.length; i++) {
             labelContainer.appendChild(document.createElement("div"));
