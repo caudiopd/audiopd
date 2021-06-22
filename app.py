@@ -98,7 +98,7 @@ def y_predict():
             output="No File Uploaded"
             return redirect(request.url)
         if(file):
-            audio, sr = librosa.load(file,sr=22050)
+            audio, sr = librosa.load(file)
             # dur = int(librosa.get_duration(y=audio,sr=sr))
             # Get number of samples for 2 seconds; replace 2 by any number
             buffer = 4 * sr
@@ -128,7 +128,7 @@ def y_predict():
                 mfccs_scaled_features=mfccs_scaled_features.reshape(1,128,-1)
                 
                 samples_wrote += buffer
-                probs = model.predict(mfccs_scaled_features)
+                probs = model.predict(mfccs_scaled_features/128)
                 best_labels = np.argsort(probs[0])[:-4:-1]
                 counter += 4
                 chk1 = round(probs[0][best_labels[0]]*100) 
