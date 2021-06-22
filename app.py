@@ -137,7 +137,7 @@ def y_predict():
                 if((label[best_labels[0]]=='glassbreak' and chk1>0) or (label[best_labels[1]]=='glassbreak' and chk2>0)):
                     a+=1
                     
-                if((label[best_labels[0]]=='gun_shot' and chk1>0) or (label[best_labels[1]]=='gun_shot' and chk2>0) or (label[best_labels[2]]=='gun_shot' and chk2>0)):
+                if((label[best_labels[0]]=='gun_shot' and chk1>0) or (label[best_labels[1]]=='gun_shot' and chk2>0) or (label[best_labels[2]]=='gun_shot' and chk3>0)):
                     b+=1
                    
                 if((label[best_labels[0]]=='dog_bark' and chk1>0) or (label[best_labels[1]]=='dog_bark' and chk2>0)):
