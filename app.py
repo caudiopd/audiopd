@@ -134,16 +134,16 @@ def y_predict():
                 chk1 = round(probs[0][best_labels[0]]*100) 
                 chk2 = round(probs[0][best_labels[1]]*100) 
                 chk3 = round(probs[0][best_labels[2]]*100) 
-                if((label[best_labels[0]]=='glassbreak' and chk1>0) or (label[best_labels[1]]=='glassbreak' and chk2>0) or (label[best_labels[2]]=='glassbreak' and chk3>0)):
+                if((label[best_labels[0]]=='glassbreak' and chk1>0) or (label[best_labels[1]]=='glassbreak' and chk2>0)):
                     a+=1
                     
                 if((label[best_labels[0]]=='gun_shot' and chk1>0) or (label[best_labels[1]]=='gun_shot' and chk2>0) or (label[best_labels[2]]=='gun_shot' and chk2>0)):
                     b+=1
                    
-                if((label[best_labels[0]]=='dog_bark' and chk1>0) or (label[best_labels[1]]=='dog_bark' and chk2>0) or (label[best_labels[2]]=='dog_bark' and chk2>0)):
+                if((label[best_labels[0]]=='dog_bark' and chk1>0) or (label[best_labels[1]]=='dog_bark' and chk2>0)):
                     c+=1
                    
-                if((label[best_labels[0]]=='scream' and chk1>90) or (label[best_labels[1]]=='scream' and chk2>90) or (label[best_labels[2]]=='scream' and chk3>90)):
+                if((label[best_labels[0]]=='scream' and chk1>0) or (label[best_labels[1]]=='scream' and chk2>0)):
                     d+=1
                    
                 output += f'Predictions'
