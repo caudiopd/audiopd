@@ -178,25 +178,26 @@ def y_predict():
                 chk1 = round(probs[0][best_labels[0]]*100) 
                 chk2 = round(probs[0][best_labels[1]]*100) 
                 chk3 = round(probs[0][best_labels[2]]*100) 
-                if((label[best_labels[0]]=='glassbreak' and chk1>50) or (label[best_labels[1]]=='glassbreak' and chk2>10) or (label[best_labels[2]]=='glassbreak' and chk3>10)):
+                if((label[best_labels[0]]=='glassbreak' and chk1>0) or (label[best_labels[1]]=='glassbreak' and chk2>0) or (label[best_labels[2]]=='glassbreak' and chk3>0)):
                     a+=1
                     
-                if((label[best_labels[0]]=='gun_shot' and chk1>2) or (label[best_labels[1]]=='gun_shot' and chk2>2) or (label[best_labels[2]]=='gun_shot' and chk2>2)):
+                if((label[best_labels[0]]=='gun_shot' and chk1>0) or (label[best_labels[1]]=='gun_shot' and chk2>0) or (label[best_labels[2]]=='gun_shot' and chk2>0)):
                     b+=1
                    
-                if((label[best_labels[0]]=='dog_bark' and chk1>2) or (label[best_labels[1]]=='dog_bark' and chk2>2) or (label[best_labels[2]]=='dog_bark' and chk2>2)):
+                if((label[best_labels[0]]=='dog_bark' and chk1>0) or (label[best_labels[1]]=='dog_bark' and chk2>0) or (label[best_labels[2]]=='dog_bark' and chk2>0)):
                     c+=1
                    
-                if((label[best_labels[0]]=='scream' and chk1>2) or (label[best_labels[1]]=='scream' and chk2>2) or (label[best_labels[2]]=='scream' and chk3>2)):
+                if((label[best_labels[0]]=='scream' and chk1>90) or (label[best_labels[1]]=='scream' and chk2>90) or (label[best_labels[2]]=='scream' and chk3>90)):
                     d+=1
                    
                 output += f'Predictions'
                 for i in range(3):
                     chks = round(probs[0][best_labels[i]]*100)
                     labs= label[best_labels[i]]
-                    if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark' or labs=='scream') and chks>50):
+                    if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark') and chks>0):
                         output = output + f'\n{label[best_labels[i]]} - {round(probs[0][best_labels[i]]*100)}% from {counter}s to {counter+4}s  \n' 
-
+                    elif(labs=='scream' and chks>90):
+                        output = output + f'\n{label[best_labels[i]]} - {round(probs[0][best_labels[i]]*100)}% from {counter}s to {counter+4}s  \n'
                 if(output!="Predictions"):
                     outlist.append(output) 
                     output=""
