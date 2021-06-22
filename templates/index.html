@@ -53,6 +53,16 @@ emailjs.init("user_DMcYvnWAixcEdHEFs362N");
  let sendwav = [];
  let sendsamp=[];
  
+function preview() {
+        previewOpen = window.open("", "previewOpen", "width=500, height=600");
+        previewOpen.document.body.innerHTML = "<pre>" + document.getElementById("wavout").value + "</pre>"; // Get the value of text area and run HTML code
+       
+      }
+      function closePreview() {
+        previewOpen.close();
+        // function to close the preview 
+      }
+
  function sendEmail(msg) {
   
   var temp = {
@@ -75,6 +85,7 @@ emailjs.init("user_DMcYvnWAixcEdHEFs362N");
         sendsamp=[];
         const recognizer = await createModel();
         const classLabels = recognizer.wordLabels(); // get class labels
+        document.getElementById("label-container").style.display="";
         const labelContainer = document.getElementById("label-container");
         for (let i = 0; i < classLabels.length; i++) {
             labelContainer.appendChild(document.createElement("div"));
@@ -98,7 +109,7 @@ emailjs.init("user_DMcYvnWAixcEdHEFs362N");
               var lab = classLabels[i];
               if(lab.includes("Background Noise"))
               {
-                const classPrediction = "-------------------------------" ;
+                const classPrediction = "" ;
                 labelContainer.childNodes[i].innerHTML = classPrediction;
               }
               else if(score >= 0.50)
@@ -214,12 +225,12 @@ function refresh(){
     <h1>Real Time Prediction</h1>
     <div class="centered">
     
-      <div id="label-container"></div>
+     
     <button class="button" onClick="init()"><span>Start Prediction</span></button> 
    
    <p><button class="button" onClick="check()"><span>Stop Prediction</span></button></p> 
     
-    
+   <div id="label-container"></div>    
     
     <button class="button"  onclick="mail()"><span>Send E-Logs</span></button>
     
@@ -267,9 +278,10 @@ function refresh(){
             {{ res }}
             {% endfor %}
           </textarea>
-        
           <div>
             {{ ots }}</div>
+            <span><input id="preview" type="submit" class="preview" value="Preview" onClick="preview()">
+              <input id="closePreview" type="submit" class="preview" value="Close Preview" onClick="closePreview()"></span> 
       </div>
    {% endif %}</p>
 
