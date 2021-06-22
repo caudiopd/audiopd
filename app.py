@@ -11,61 +11,18 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template,redirect,request,Response
 from flask import (Flask,g,redirect,render_template,request,session,url_for)
 
-# login settings
-# class User:
-#     def __init__(self, id, username, password):
-#         self.id = id
-#         self.username = username
-#         self.password = password
-
-#     def __repr__(self):
-#         return f'<User: {self.username}>'
-
-# users = []
-# users.append(User(id=1, username='raeespeer', password='password'))
-# users.append(User(id=2, username='vigneshprabhu', password='password'))
-
 
 app = Flask(__name__,template_folder="templates",static_folder="static")
 app.secret_key = 'check'
 
-# login process
-# @app.before_request
-# def before_request():
-#     g.user = None
-
-#     if 'user_id' in session:
-#         user = [x for x in users if x.id == session['user_id']][0]
-#         g.user = user
-        
 
 # @app.route('/login', methods=['GET', 'POST'])
 @app.route('/')
 def login():
-  
-    # try:
-    #     if request.method == 'POST':
-    #         # session.pop('user_id', None)
-
-    #         # username = request.form['username']
-    #         # password = request.form['password']
-            
-    #         # user = [x for x in users if x.username == username][0]
-            
-    #         # if user and user.password == password:
-    #         #     session['user_id'] = user.id
-                
-    #             return redirect(url_for('profile'))
-
-    #         # return redirect(url_for('login'))
-    # except:
-    #     return redirect(url_for('login'))
     return render_template('login.html')
 
 @app.route('/profile.html')
 def profile():
-    # if not g.user:
-    #     return redirect(url_for('login'))
 
     return render_template('profile.html')
 
@@ -152,7 +109,7 @@ def y_predict():
             rate = 22050
             a,b,c,d=0,0,0,0
             while samples_wrote < samples_total:
-
+                a,b,c,d=0,0,0,0
                 #check if the buffer is not exceeding total samples 
                 # if buffer > (samples_total - samples_wrote):
                 #     buffer = samples_total - samples_wrote
@@ -194,10 +151,9 @@ def y_predict():
                 for i in range(3):
                     chks = round(probs[0][best_labels[i]]*100)
                     labs= label[best_labels[i]]
-                    if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark') and chks>0):
+                    if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark' or labs=='scream') and chks>0):
                         output = output + f'\n{label[best_labels[i]]} - {round(probs[0][best_labels[i]]*100)}% from {counter}s to {counter+4}s  \n' 
-                    elif(labs=='scream' and chks>90):
-                        output = output + f'\n{label[best_labels[i]]} - {round(probs[0][best_labels[i]]*100)}% from {counter}s to {counter+4}s  \n'
+                 
                 if(output!="Predictions"):
                     outlist.append(output) 
                     output=""
