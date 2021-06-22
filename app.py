@@ -128,7 +128,7 @@ def y_predict():
                 mfccs_scaled_features=mfccs_scaled_features.reshape(1,128,-1)
                 
                 samples_wrote += buffer
-                probs = model.predict(mfccs_scaled_features/128)
+                probs = model.predict(mfccs_scaled_features)
                 best_labels = np.argsort(probs[0])[:-4:-1]
                 counter += 4
                 chk1 = round(probs[0][best_labels[0]]*100) 
