@@ -165,8 +165,8 @@ nav a:hover::before {
   --left-button-hover-color: rgba(11, 101, 161, 0.3);
   --right-bg-color: rgba(43, 43, 43, 0.8);
   --right-button-hover-color: rgba(92, 92, 92, 0.3);
-  --hover-width: 85%;
-  --other-width: 15%;
+  --hover-width: 75%;
+  --other-width: 25%;
   --speed: 1000ms;
 }
 
@@ -186,7 +186,7 @@ h1 { /*heading of both screens*/
   left: 50%;
   top: 2%;
   transform: translateX(-50%);
-  white-space: pre-wrap;
+  white-space: nowrap;
 }
 
 h2 { /*heading of both screens*/
@@ -196,7 +196,7 @@ h2 { /*heading of both screens*/
   left: 50%;
   top: 1%;
   transform: translateX(-50%);
-  white-space: pre-wrap;
+  white-space: nowrap;
 }
 
 
