@@ -1,10 +1,12 @@
 import numpy as np
 import librosa
+
 from noisereduce.generate_noise import band_limited_noise
 import matplotlib.pyplot as plt
 import noisereduce as nr
 import tensorflow as tf
 from sklearn.preprocessing import LabelEncoder
+import os
 import numpy as np
 from flask import Flask, request, jsonify, render_template,redirect,request,Response
 from flask import (Flask,g,redirect,render_template,request,session,url_for)
@@ -139,7 +141,7 @@ def y_predict():
             output="No File Uploaded"
             return redirect(request.url)
         if(file):
-            audio, sr = librosa.load(file,sr=44100)
+            audio, sr = librosa.load(file,sr=22050)
             # dur = int(librosa.get_duration(y=audio,sr=sr))
             # Get number of samples for 2 seconds; replace 2 by any number
             buffer = 4 * sr
@@ -147,7 +149,7 @@ def y_predict():
             samples_total = len(audio)
             samples_wrote = 0
             counter = 0
-            rate = 44100
+            rate = 22050
             a,b,c,d=0,0,0,0
             while samples_wrote < samples_total:
 
@@ -162,7 +164,7 @@ def y_predict():
                 noise_clip = noise[:rate*noise_len]
                 audio_clip_band_limited = block+noise
             #     noise_reduced = nr.reduce_noise(audio_clip=audio_clip_band_limited, noise_clip=noise_clip,prop_decrease=1.0, verbose=False)
-                noise_reduced = nr.reduce_noise(audio_clip=audio_clip_band_limited, noise_clip=noise_clip, prop_decrease=1.0,pad_clipping=True, use_tensorflow=True,verbose=False)
+                noise_reduced = nr.reduce_noise(audio_clip=block, noise_clip=audio_clip_band_limited, prop_decrease=1.0,pad_clipping=True, use_tensorflow=True,verbose=False)
                 mfccs_features = librosa.feature.melspectrogram(y=noise_reduced, sr=sr)
                 mfccs_scaled_features = np.mean(mfccs_features.T,axis=0)
                 
@@ -176,23 +178,23 @@ def y_predict():
                 chk1 = round(probs[0][best_labels[0]]*100) 
                 chk2 = round(probs[0][best_labels[1]]*100) 
                 chk3 = round(probs[0][best_labels[2]]*100) 
-                if((label[best_labels[0]]=='glassbreak' and chk1>10) or (label[best_labels[1]]=='glassbreak' and chk2>10) or (label[best_labels[2]]=='glassbreak' and chk3>10)):
+                if((label[best_labels[0]]=='glassbreak' and chk1>50) or (label[best_labels[1]]=='glassbreak' and chk2>10) or (label[best_labels[2]]=='glassbreak' and chk3>10)):
                     a+=1
                     
-                if((label[best_labels[0]]=='gun_shot' and chk1>10) or (label[best_labels[1]]=='gun_shot' and chk2>10) or (label[best_labels[2]]=='gun_shot' and chk2>10)):
+                if((label[best_labels[0]]=='gun_shot' and chk1>2) or (label[best_labels[1]]=='gun_shot' and chk2>2) or (label[best_labels[2]]=='gun_shot' and chk2>2)):
                     b+=1
                    
-                if((label[best_labels[0]]=='dog_bark' and chk1>10) or (label[best_labels[1]]=='dog_bark' and chk2>10) or (label[best_labels[2]]=='dog_bark' and chk2>10)):
+                if((label[best_labels[0]]=='dog_bark' and chk1>2) or (label[best_labels[1]]=='dog_bark' and chk2>2) or (label[best_labels[2]]=='dog_bark' and chk2>2)):
                     c+=1
                    
-                if((label[best_labels[0]]=='scream' and chk1>10) or (label[best_labels[1]]=='scream' and chk2>10) or (label[best_labels[2]]=='scream' and chk3>10)):
+                if((label[best_labels[0]]=='scream' and chk1>2) or (label[best_labels[1]]=='scream' and chk2>2) or (label[best_labels[2]]=='scream' and chk3>2)):
                     d+=1
                    
                 output += f'Predictions'
                 for i in range(3):
                     chks = round(probs[0][best_labels[i]]*100)
                     labs= label[best_labels[i]]
-                    if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark' or labs=='scream') and chks>10):
+                    if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark' or labs=='scream') and chks>50):
                         output = output + f'\n{label[best_labels[i]]} - {round(probs[0][best_labels[i]]*100)}% from {counter}s to {counter+4}s  \n' 
 
                 if(output!="Predictions"):
@@ -227,4 +229,4 @@ def y_predict():
 
 if __name__ == "__main__":
     
-    app.run()
+    app.run(debug=True)
