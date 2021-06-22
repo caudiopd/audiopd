@@ -34,12 +34,12 @@ def index():
 
 # Replicate label encoder
 lb = LabelEncoder()
-label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
-        'drilling', 'engine_idling', 'glassbreak', 'gun_shot',
-        'jackhammer', 'scream', 'siren', 'street_music']
 # label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
-#        'engine_idling', 'glassbreak', 'gun_shot', 'scream', 'siren',
-#        'street_music']        
+#         'drilling', 'engine_idling', 'glassbreak', 'gun_shot',
+#         'jackhammer', 'scream', 'siren', 'street_music']
+label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
+       'engine_idling', 'glassbreak', 'gun_shot', 'scream', 'siren',
+       'street_music']        
 # label = ['dog_bark','gun_shot','glassbreak','scream']
 
 
@@ -49,7 +49,7 @@ label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
 
     # Model reconstruction from JSON file
 model_path = r"./"
-model_name = "cnnfull"
+model_name = "cnnfinal"
 with open(model_path + model_name + '.json', 'r') as f:
     model = tf.keras.models.model_from_json(f.read())
 
@@ -134,16 +134,16 @@ def y_predict():
                 chk1 = round(probs[0][best_labels[0]]*100) 
                 chk2 = round(probs[0][best_labels[1]]*100) 
                 chk3 = round(probs[0][best_labels[2]]*100) 
-                if((label[best_labels[0]]=='glassbreak' and chk1>0) or (label[best_labels[1]]=='glassbreak' and chk2>0)):
+                if((label[best_labels[0]]=='glassbreak' and chk1>0) or (label[best_labels[1]]=='glassbreak' and chk2>0) or (label[best_labels[2]]=='glassbreak' and chk3>0)):
                     a+=1
                     
                 if((label[best_labels[0]]=='gun_shot' and chk1>0) or (label[best_labels[1]]=='gun_shot' and chk2>0) or (label[best_labels[2]]=='gun_shot' and chk3>0)):
                     b+=1
                    
-                if((label[best_labels[0]]=='dog_bark' and chk1>0) or (label[best_labels[1]]=='dog_bark' and chk2>0)):
+                if((label[best_labels[0]]=='dog_bark' and chk1>0) or (label[best_labels[1]]=='dog_bark' and chk2>0) or (label[best_labels[2]]=='dog_bark' and chk3>0)):
                     c+=1
                    
-                if((label[best_labels[0]]=='scream' and chk1>0) or (label[best_labels[1]]=='scream' and chk2>0)):
+                if((label[best_labels[0]]=='scream' and chk1>0) or (label[best_labels[1]]=='scream' and chk2>0) or (label[best_labels[2]]=='scream' and chk3>0)):
                     d+=1
                    
                 output += f'Predictions'
