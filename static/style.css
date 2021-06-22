@@ -194,7 +194,7 @@ h2 { /*heading of both screens*/
   color: rgb(13, 165, 224);
   position: absolute;
   left: 50%;
-  top: 1%;
+  top: -6%;
   transform: translateX(-50%);
   white-space: nowrap;
 }
