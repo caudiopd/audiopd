@@ -109,7 +109,6 @@ def y_predict():
             rate = 22050
             a,b,c,d=0,0,0,0
             while samples_wrote < samples_total:
-                a,b,c,d=0,0,0,0
                 #check if the buffer is not exceeding total samples 
                 # if buffer > (samples_total - samples_wrote):
                 #     buffer = samples_total - samples_wrote
@@ -186,4 +185,4 @@ def y_predict():
 
 if __name__ == "__main__":
     
-    app.run(debug=True)
+    app.run()
