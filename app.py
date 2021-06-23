@@ -152,7 +152,7 @@ def y_predict():
                     labs= label[best_labels[i]]
                     if((labs=='gun_shot'or labs=='glassbreak' or labs=='dog_bark' or labs=='scream') and chks>0):
                         output = output + f'\n{label[best_labels[i]]} - {round(probs[0][best_labels[i]]*100)}% from {counter}s to {counter+4}s  \n' 
-                 
+                counter += 4
                 if(output!="Predictions"):
                     outlist.append(output) 
                     output=""
@@ -176,7 +176,7 @@ def y_predict():
 
             res =f'{maxx}' 
             ots +=f'\n Suspicious Sounds detected !!!'
-            counter += 4
+            
 
             
             
