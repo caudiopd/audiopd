@@ -37,10 +37,10 @@ lb = LabelEncoder()
 # label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
 #         'drilling', 'engine_idling', 'glassbreak', 'gun_shot',
 #         'jackhammer', 'scream', 'siren', 'street_music']
-label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
-       'engine_idling', 'glassbreak', 'gun_shot', 'scream', 'siren',
-       'street_music']        
-# label = ['dog_bark','gun_shot','glassbreak','scream']
+# label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
+#        'engine_idling', 'glassbreak', 'gun_shot', 'scream', 'siren',
+#        'street_music']        
+label = ['dog_bark','gun_shot','glassbreak','scream']
 
 
     # model work
@@ -49,7 +49,7 @@ label = ['air_conditioner', 'car_horn', 'children_playing', 'dog_bark',
 
     # Model reconstruction from JSON file
 model_path = r"./"
-model_name = "cnnfinal"
+model_name = "cnnnew"
 with open(model_path + model_name + '.json', 'r') as f:
     model = tf.keras.models.model_from_json(f.read())
 
