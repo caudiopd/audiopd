@@ -130,7 +130,7 @@ def y_predict():
                 samples_wrote += buffer
                 probs = model.predict(mfccs_scaled_features)
                 best_labels = np.argsort(probs[0])[:-4:-1]
-                counter += 4
+                
                 chk1 = round(probs[0][best_labels[0]]*100) 
                 chk2 = round(probs[0][best_labels[1]]*100) 
                 chk3 = round(probs[0][best_labels[2]]*100) 
@@ -176,7 +176,7 @@ def y_predict():
 
             res =f'{maxx}' 
             ots +=f'\n Suspicious Sounds detected !!!'
-
+            counter += 4
 
             
             
