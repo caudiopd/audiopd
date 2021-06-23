@@ -162,7 +162,7 @@ def y_predict():
             maxx = max(fin)
             fin1,fin2,fin3,fin4 = "","","",""
             if(a==0 and b==0 and c==0 and d==0):
-                ots = f'Fortunately, No Suspicious sounds detected'
+                ots = f'Fortunately, No Suspicious sounds are detected'
             else:    
                 if(a>0):
                     fin1 = "GlassBreak "
@@ -172,10 +172,10 @@ def y_predict():
                     fin3 = "Dog Bark "
                 if(d>0):
                     fin4 = "Scream "
-                ots = fin1 + fin2 + fin3 + fin4
+#                 ots = fin1 + fin2 + fin3 + fin4
 
             res =f'{maxx}' 
-            ots +=f'\n is detected !!!'
+            ots +=f'\n Suspicious Sounds detected !!!'
 
 
             
