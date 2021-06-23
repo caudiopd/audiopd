@@ -6,7 +6,7 @@
     <title>CAP-D Detector</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../static/style.css">
-
+    const URL = "https://teachablemachine.withgoogle.com/models/HsZUP733Q/";
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script type="text/javascript">
 (function() {
@@ -20,18 +20,14 @@ emailjs.init("user_DMcYvnWAixcEdHEFs362N");
 <script type="text/javascript">
     
 
-
     
-    // the link to your model provided by Teachable Machine export panel
-    const URL = "https://teachablemachine.withgoogle.com/models/HsZUP733Q/";
-
     async function createModel() {
-        const checkpointURL = URL + "model.json"; // model topology
+        const checkpointURL = URL + "model.json"; // model json file
         const metadataURL = URL + "metadata.json"; // model metadata
         
         const recognizer = speechCommands.create(
-            "BROWSER_FFT", // fourier transform type, not useful to change
-            undefined, // speech commands vocabulary feature, not useful for your models
+            "BROWSER_FFT", // fourier transform type
+            undefined, // 
             checkpointURL,
             metadataURL);
 
