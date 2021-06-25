@@ -15,7 +15,6 @@ from flask import (Flask,g,redirect,render_template,request,session,url_for)
 app = Flask(__name__,template_folder="templates",static_folder="static")
 app.secret_key = 'check'
 
-
 # @app.route('/login', methods=['GET', 'POST'])
 @app.route('/')
 def login():
